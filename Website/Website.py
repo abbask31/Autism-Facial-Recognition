@@ -6,7 +6,7 @@ import os, os.path
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLD = 'Uploads\\'
-UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'templates')
 
 app = Flask(__name__, static_folder=UPLOAD_FOLDER) 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -21,14 +21,15 @@ def main():
 def upload():
     if request.method == 'POST':  
         f = request.files['file']
-        if ".jpg" in f.filename:
-            f.save(os.path.join(UPLOAD_FOLDER, "image.jpg"))
+        if ".jpeg" in f.filename:
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], "autism_img.jpeg"))
 
             global filenme 
             filenme = f.filename
         else:
             print("Not a jpg")
             filenme = "Not a jpg"
+    return redirect(url_for('success'))
 
 @app.route('/success', methods = ['POST'])  
 def success():

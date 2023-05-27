@@ -1,13 +1,13 @@
 <html>  
 <head>  
     <title>Upload the file</title>
-    body {
-        background-image: url("{{ url_for('static', filename='autism_img.jpeg') }}");
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
 
     <style>
+        body {
+            background-image: url("{{ url_for('static', filename='autism_img.jpeg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
         .block {
             display: block;
             width: 60%;
@@ -17,7 +17,7 @@
             padding: 14px 28px;
             font-size: 16px;
             cursor: pointer;
-            text-align: center;
+            text-align: center;   
         }
         
         .block:hover {
