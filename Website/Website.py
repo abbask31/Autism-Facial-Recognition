@@ -23,6 +23,7 @@ def upload():
         f = request.files['file']
         if ".jpg" in f.filename:
             f.save(os.path.join(UPLOAD_FOLDER, "image.jpg"))
+
             global filenme 
             filenme = f.filename
         else:
