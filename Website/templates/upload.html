@@ -1,0 +1,37 @@
+<html>  
+<head>  
+    <title>Upload the file</title>
+
+    <style>
+        .block {
+            display: block;
+            width: 60%;
+            border: none;
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .block:hover {
+            background-color: #9df0bc;
+            color: black;
+        }
+        </style>
+</head>  
+<body style="background-color:rgb(75, 173, 175);">  
+    <h1><center>Autism Facial Recognition</center></h1>
+
+    <p><center>File Name: {{image}}</center></p>
+    <center><img src="{{ url_for('static', filename='image.jpg') }}"></center>
+
+    <center>
+        <form action = "/reset" method = "post" enctype="multipart/form-data">  
+            <input class="block" type = "submit" value="Back">  
+        </form>
+        </center>
+
+</body>  
+</html>
