@@ -2,9 +2,14 @@
 <head>  
     <title>upload the file</title>
     {{ dropzone.load_css() }}
-    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 200px;') }}
 
     <style>
+        .heading {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
         body {
             background-image: url("{{ url_for('static', filename='autism_img.jpeg') }}");
             background-repeat: no-repeat;
@@ -29,7 +34,7 @@
     </style>
 </head>  
 <body 
-    <h1><center>Autism Facial Recognition</center></h1>
+    <h1 class = "heading" style="text-align: center; font-size: 24px;"><strong>Autism Facial Recognition</strong></h1>
     <p><center>Only the most recently uploaded photo will be used</center></p>
 
     {{ dropzone.create(action='/upload') }}

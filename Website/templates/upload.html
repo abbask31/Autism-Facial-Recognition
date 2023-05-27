@@ -1,12 +1,19 @@
 <html>  
 <head>  
     <title>Upload the file</title>
-
+    
     <style>
         body {
             background-image: url("{{ url_for('static', filename='autism_img.jpeg') }}");
             background-repeat: no-repeat;
             background-size: cover;
+        }
+        .dropzone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #0087F7;
+            margin: 10%;
+            min-height: 200px;
         }
         .block {
             display: block;
@@ -30,6 +37,8 @@
     <h1><center>Autism Facial Recognition</center></h1>
 
     <p><center>File Name: {{image}}</center></p>
+
+
     <center><img src="{{ url_for('static', filename='image.jpg') }}"></center>
 
     <center>
