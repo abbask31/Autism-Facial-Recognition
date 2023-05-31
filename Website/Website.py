@@ -122,9 +122,9 @@ def success():
     
     # Return the predicted class
     print(probability)
-    diagnosis = "Not Autistic"
+    diagnosis = "Class Prediction: Not Autistic"
     if predicted_class.item() == 0:
-        diagnosis = "Autistic"
+        diagnosis = "Class Prediction: Autistic"
     return render_template("upload.html", image = filenme, output = diagnosis)
 
 @app.route('/reset', methods = ['POST'])  
