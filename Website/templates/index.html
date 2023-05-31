@@ -33,13 +33,16 @@
         }
     </style>
 </head>  
-<body 
+<body> 
+    <br> <br>
     <h1 class = "heading" style="text-align: center; font-size: 24px;"><strong>Autism Facial Recognition</strong></h1>
     <p><center>Only the most recently uploaded photo will be used</center></p>
 
     {{ dropzone.create(action='/upload') }}
     {{ dropzone.load_js() }}
     {{ dropzone.config() }}
+
+    <h3><center>{{error}}</center></h3>
 
     <center>
     <form action = "/success" method = "post" enctype="multipart/form-data">  

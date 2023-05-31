@@ -97,8 +97,7 @@ def upload():
             global filenme 
             filenme = f.filename
         else:
-            print("Not a jpg")
-            filenme = "Not a jpg"
+            render_template("index.html", error = "File Is Not a JPG")
     return redirect(url_for('success'))
 
 @app.route('/success', methods = ['POST'])  
@@ -106,7 +105,9 @@ def success():
     # Read the image file from the request
     
     # Open and transform the image
-    image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], "image.jpg"))
+    try: image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], "image.jpg"))
+    except:
+        return render_template("index.html", error = "Invalid File Selected")
     image = data_transforms(image)
     image = image.unsqueeze(0)  # Add a batch dimension
     

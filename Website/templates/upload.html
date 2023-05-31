@@ -34,14 +34,15 @@
         </style>
 </head>  
 <body style="background-color:rgb(75, 173, 175);">  
+    <br> <br>
     <h1><center>Autism Facial Recognition</center></h1>
 
     <p><center>File Name: {{image}}</center></p>
 
 
-    <center><img src="{{ url_for('static', filename='image.jpg') }}"></center>
+    <center><img src="{{ url_for('static', filename='image.jpg') }}" height = 550 width = auto></center>
 
-    <h3><center>{{output}}</center></h3>
+    <h2><center>{{output}}</center></h2>
 
     <center>
         <form action = "/reset" method = "post" enctype="multipart/form-data">  
