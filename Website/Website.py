@@ -110,13 +110,18 @@ def success():
         return render_template("index.html", error = "Invalid File Selected")
     image = data_transforms(image)
     image = image.unsqueeze(0)  # Add a batch dimension
+    probability = None
     
     # Pass the image through the model
     with torch.no_grad():
         output = model(image)
         _, predicted_class = torch.max(output, 1)
+        probabilities = torch.softmax(output, dim=1)
+        class_index = predicted_class.item()  # Replace with the desired class index
+        probability = probabilities[0, class_index]
     
     # Return the predicted class
+    print(probability)
     diagnosis = "Not Autistic"
     if predicted_class.item() == 0:
         diagnosis = "Autistic"
