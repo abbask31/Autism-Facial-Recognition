@@ -1,6 +1,5 @@
 # Autism-Facial-Recognition
 The Process to generate the model and website is time consuming so here are videos demonstrating them. </br>
-[Video for the Model Demo]() </br>
 [Video for the Website Demo](https://youtu.be/8JzHdWFlOtc) </br>
 
 1. Download the entire Git repository and unzip it.
