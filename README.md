@@ -7,7 +7,7 @@ The Process to generate the model and website is time consuming so here are vide
 ![Download Zip](Reference_Images/Download.png)
 2. Navigate to the Website folder and run "pip install -r requirements.txt" to install all of the dependencies.
 ![Dependencies](Reference_Images/Requirements.png)
-3. Navigate to this [LINK](https://drive.google.com/drive/folders/1GUrhdvB0zFPIa0KqY1RM-vqybp0JzIlv?usp=sharing) to download the model.pt and the optional dataset.
+3. Navigate to this [LINK](https://drive.google.com/file/d/1lw2oQ0Z3xaS2AophmNpvUcRT12slhxwx/view) to download the model.pt.
 ![Download Model](Reference_Images/Model.png)
 4. Place the Model.pt file in the Website folder.
 ![Download Model](Reference_Images/File.png)
