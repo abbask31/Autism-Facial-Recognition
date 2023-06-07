@@ -1,11 +1,9 @@
-from distutils.log import debug
 from fileinput import filename
 from flask import *
 from flask_dropzone import Dropzone
-import os, os.path
-from keras.models import load_model
-from PIL import Image
 import numpy as np
+import os, os.path
+from PIL import Image
 from skimage import transform
 import torch
 import torch.nn as nn
@@ -53,23 +51,23 @@ class RecognitionModel(nn.Module):
         return x
 
 
+# Initialize the folder where 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLD = 'Uploads\\'
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static')
 
 app = Flask(__name__, static_folder=UPLOAD_FOLDER) 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-print(os.path.join(APP_ROOT, 'model\model.h5'))
 device = torch.device('cpu')
 
 
-# model = torch.load('model_82.pt')
-state_dict = torch.load('model_82.pt', map_location=torch.device('cpu'))
+# Load in the model
+state_dict = torch.load('model.pt', map_location=torch.device('cpu'))
 model = RecognitionModel()
 model.load_state_dict(state_dict)
 model.eval()
 
-
+# Transform object used to resize and prepare each image
 data_transforms = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.RandomHorizontalFlip(),
@@ -78,20 +76,21 @@ data_transforms = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
-#model = load_model(os.path.join(APP_ROOT, 'model\model_82.h5'))
 
-
+# Start the home page and initialize the dropzone
 dropzone = Dropzone(app)
 filenme = "NULL"
 @app.route('/')  
 def main():
     return reset()
 
+# Main home page
 @app.route('/upload', methods = ['POST'])  
 def upload():
     if request.method == 'POST':  
         f = request.files['file']
         if ".jp" in f.filename:
+            # Save the image for the website
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], "image.jpg"))
 
             global filenme 
@@ -101,10 +100,8 @@ def upload():
     return redirect(url_for('success'))
 
 @app.route('/success', methods = ['POST'])  
-def success():
-    # Read the image file from the request
-    
-    # Open and transform the image
+def success():    
+    # Open and transform the asved image
     try: image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], "image.jpg"))
     except:
         return render_template("index.html", error = "Invalid File Selected")
@@ -127,14 +124,17 @@ def success():
         diagnosis = "Class Prediction: Autistic"
     return render_template("upload.html", image = filenme, output = diagnosis)
 
+# Resets the home page
 @app.route('/reset', methods = ['POST'])  
 def reset():
     global filenme 
     filenme = "NULL"
+    #Try to delete the saved image
     try: os.remove(os.path.join(UPLOAD_FOLDER, "image.jpg"))
     except: pass
     return render_template("index.html")
 
+# Apply the transform to the image
 def load(filename):
     np_image = Image.open(filename)
     np_image = np.array(np_image).astype('float32')/255
